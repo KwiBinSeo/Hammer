@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.vip.hammer.GrapActivity">
+
+
+    <Switch
+        android:id="@+id/GSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="GSwitch"
+        app:layout_constraintLeft_toRightOf="@+id/ASwitch"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_below="@+id/CallMain"
+        android:layout_alignParentEnd="true" />
+
+    <Switch
+        android:id="@+id/ASwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:text="ASwitch"
+        app:layout_constraintLeft_toRightOf="@+id/CallMain"
+        tools:layout_editor_absoluteY="16dp"
+        android:layout_below="@+id/CallMain"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/CallMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CallMain"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="300dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/FL"
+        android:orientation="horizontal"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/CallMain"
+        android:layout_alignParentBottom="true">
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/FL"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="53dp"
+        android:text="TextView"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="TextView"
+        android:layout_alignTop="@+id/textView1"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
