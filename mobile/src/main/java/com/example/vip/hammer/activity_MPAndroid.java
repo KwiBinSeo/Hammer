@@ -134,6 +134,7 @@ public class activity_MPAndroid extends AppCompatActivity  implements
         sensor1 = SM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGoogleClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
         dbhelp = new DbHelper(context); // DB연결 추가
+
     }
 
     public void DrawGrap() {
@@ -303,8 +304,13 @@ public class activity_MPAndroid extends AppCompatActivity  implements
 
     private void updateAccelerometer(double Ax, double Ay, double Az ) {
         Switch A_Switch = (Switch) findViewById(R.id.Aswitch);
+        Switch DataSwitch = (Switch) findViewById(R.id.Dataswitch);
 
-        insert(Ax, Ay, Az);
+        if(DataSwitch.isChecked()) {
+            insert(Ax, Ay, Az); //Database에 추가
+        }
+        else {
+        }
 
         Ax = Double.parseDouble(String.format("%.2f",Ax));
         Ay = Double.parseDouble(String.format("%.2f",Ay));

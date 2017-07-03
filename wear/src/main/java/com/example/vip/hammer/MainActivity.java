@@ -74,9 +74,7 @@ public class MainActivity extends WearableActivity implements
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.text);
             }
-
         });
-
     }
     @Override
     public void onEnterAmbient(Bundle ambientDetails) {
@@ -165,7 +163,6 @@ public class MainActivity extends WearableActivity implements
         SM.unregisterListener(this, sensor2);
         mGoogleApiClient.disconnect();
         super.onPause();
-
     }
 
     @Override
