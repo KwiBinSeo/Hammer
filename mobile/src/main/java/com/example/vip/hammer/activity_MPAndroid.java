@@ -69,11 +69,11 @@ public class activity_MPAndroid extends AppCompatActivity  implements
     public static ArrayList<String> labels = new ArrayList<>();
     public String flag;
 
+    // 가속도 센서 데이터를 저장하는 배열
     public static float[] accX = new float[20];
     public static float[] accY = new float[20];
     public static float[] accZ = new float[20];
     public static int[] _flag = new int[20];
-
 
     // 시계 부분 추가
     GoogleApiClient mGoogleClient;
