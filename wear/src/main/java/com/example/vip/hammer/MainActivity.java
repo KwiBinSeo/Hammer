@@ -1,8 +1,5 @@
 package com.example.vip.hammer;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,7 +8,6 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
-import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -31,14 +27,10 @@ public class MainActivity extends WearableActivity implements
         GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "WearMain";
-    private static final String COUNT_KEY = "com.example.key.count";
-    private static final String Sensor_Test="ST";
-    int count =0;
 
     private SensorManager SM;
     private Sensor sensor1;
     private Sensor sensor2;
-    private TextView mTextView;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -72,29 +64,22 @@ public class MainActivity extends WearableActivity implements
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.text);
             }
         });
     }
     @Override
     public void onEnterAmbient(Bundle ambientDetails) {
         super.onEnterAmbient(ambientDetails);
-
-        //mTextView.setTextColor(Color.WHITE);
-        //mTextView.getPaint().setAntiAlias(false);
     }
 
     @Override
     public void onExitAmbient() {
         super.onExitAmbient();
-
-//        mTextView.setTextColor(Color.GREEN);
-//        mTextView.getPaint().setAntiAlias(true);
     }
+
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
-    SensorEvent event;
 
     public void onSensorChanged(SensorEvent event) {
           if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -128,7 +113,7 @@ public class MainActivity extends WearableActivity implements
         putDataMapReq.getDataMap().putInt("Type", Type);
 
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
+        //PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
     }
 
     private void GyroCounter(double gx, double gy, double gz, int Type)
@@ -142,7 +127,7 @@ public class MainActivity extends WearableActivity implements
 
 
         PutDataRequest putDataReq = putDataMapReq.asPutDataRequest();
-        PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
+        //PendingResult<DataApi.DataItemResult> pendingResult = Wearable.DataApi.putDataItem(mGoogleApiClient, putDataReq);
     }
 
     //SENSOR_DELAY_UI

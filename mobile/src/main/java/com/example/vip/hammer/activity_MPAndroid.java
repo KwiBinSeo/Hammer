@@ -57,15 +57,12 @@ public class activity_MPAndroid extends AppCompatActivity  implements
         DataApi.DataListener {
 
     LineChart lineChart;
-    LineData data_accX, data_accY;
-    public float number, number1, number2;
-    public Button button;
+    LineData data_accX;
+    public float number;
     public static int count = 0, index = 0;
     public static int check = 0;
-    public Random random;
     public float max = 40, min = -40;
 
-    public static ArrayList<Entry> entries = new ArrayList<>();
     public static ArrayList<Entry> entries_accX = new ArrayList<>();
     public static ArrayList<Entry> entries_accY = new ArrayList<>();
     public static ArrayList<Entry> entries_accZ = new ArrayList<>();
@@ -86,19 +83,10 @@ public class activity_MPAndroid extends AppCompatActivity  implements
     private Sensor sensor1;
 
 
-    // DB 연결 추가
-    DbHelper dbhelp;
-    SQLiteDatabase sqldb;
-    Context context = this;
-    String rtime;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__mpandroid);
-
-        button = (Button) findViewById(R.id.BackBtn);
-        random = new Random(); // 랜덤 객체 생성
 
         lineChart = (LineChart) findViewById(R.id.chart);
 
@@ -112,28 +100,16 @@ public class activity_MPAndroid extends AppCompatActivity  implements
         YAxis yAxis_Right = lineChart.getAxisRight();
         yAxis_Right.setLabelCount(5,true);
 
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //number = (random.nextFloat() * (max-10 - min + 1) + min); //랜덤한 수 할당
-                //number1 = (random.nextFloat() * (max-10 - min + 1) + min); //랜덤한 수 할당
-                //number2 = (random.nextFloat() * (max-10 - min + 1) + min); //랜덤한 수 할당
-
-            }
-        });
-
-
         SM = ((SensorManager) getSystemService(SENSOR_SERVICE));
         List<Sensor> devicesSensors = SM.getSensorList(Sensor.TYPE_ALL);
+
         for(Sensor s : devicesSensors){
             Log.d(TAG, "name: " + s.getName());
             Log.d(TAG, "----------------------");
         }
+
         sensor1 = SM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGoogleClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
-        dbhelp = new DbHelper(context); // DB연결 추가
 
     }
 
@@ -166,12 +142,9 @@ public class activity_MPAndroid extends AppCompatActivity  implements
         dataSets.add(dataset_accZ);
 
         data_accX = new LineData(labels, dataSets);
-        //dataset.setColors(ColorTemplate.COLORFUL_COLORS); //
-        //dataset.setDrawCubic(false);
-        //dataset.setDrawFilled(false);
 
         lineChart.setData(data_accX);
-        //lineChart.setData(data_accY);
+
         lineChart.animateY(0);
     }
 
