@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -82,6 +83,10 @@ public class activity_MPAndroid extends AppCompatActivity  implements
     private SensorManager SM;
     private Sensor sensor1;
 
+    // 데이터 갯수 세는 변수
+    private static int input_count = 0;
+    private static int inputed_count = 0;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +116,8 @@ public class activity_MPAndroid extends AppCompatActivity  implements
         sensor1 = SM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGoogleClient = new GoogleApiClient.Builder(this).addApi(Wearable.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this).build();
 
+        // 텍스트뷰 생성
+        textView = (TextView) findViewById(R.id.textView);
     }
 
     public void DrawGrap() {
@@ -277,19 +284,21 @@ public class activity_MPAndroid extends AppCompatActivity  implements
 
     private void updateAccelerometer(double Ax, double Ay, double Az ) {
         Switch A_Switch = (Switch) findViewById(R.id.Aswitch);
-        Switch DataSwitch = (Switch) findViewById(R.id.Dataswitch);
-
-        if(DataSwitch.isChecked()) {
-            insert(Ax, Ay, Az); //Database에 추가
-        }
-        else {
-        }
 
         Ax = Double.parseDouble(String.format("%.2f",Ax));
         Ay = Double.parseDouble(String.format("%.2f",Ay));
         Az = Double.parseDouble(String.format("%.2f",Az));
 
         if(A_Switch.isChecked()) {
+
+            // DB 삽입 부분
+            input_count++; // 데이터 입력받은 순간 count 값 증가
+
+            insert(Ax, Ay, Az); //Database에 추가
+            inputed_count++;
+            textView.setText(inputed_count + " / " + input_count); // 카운트 부분 추가
+            // DB 삽입 부분 끝
+
             number_accX = (float) Ax;
             number_accY = (float) Ay;
             number_accZ = (float) Az;
