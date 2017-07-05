@@ -88,6 +88,13 @@ public class activity_MPAndroid extends AppCompatActivity  implements
     private static int inputed_count = 0;
     private TextView textView;
 
+    // Data객체의 ArrayList 생성
+    private static ArrayList<Float> mAccX;
+    private static ArrayList<Float> mAccY;
+    private static ArrayList<Float> mAccZ;
+    private Button DBBtn;
+    private boolean checkDB = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +125,33 @@ public class activity_MPAndroid extends AppCompatActivity  implements
 
         // 텍스트뷰 생성
         textView = (TextView) findViewById(R.id.textView);
+
+        // ArrayList 객체 생성
+        //textView.setText(inputed_count + " / " + input_count); // 카운트 부분 추가
+        mAccX = new ArrayList<>();
+        mAccY = new ArrayList<>();
+        mAccZ = new ArrayList<>();
+        DBBtn = (Button) findViewById(R.id.DBBtn); // DB 연결 버튼
+        DBBtn.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                checkDB = true;
+                for(int i = 0; i < mAccX.size(); i++) {
+                    float x = mAccX.get(i);
+                    float y = mAccY.get(i);
+                    float z = mAccZ.get(i);
+                    insert(x, y, z); //Database에 추가
+                    inputed_count++;
+                    textView.setText(inputed_count + " / " + input_count); // 카운트 부분 추가
+                }
+                mAccX.clear();
+                mAccY.clear();
+                mAccZ.clear();
+            }
+        });
     }
 
     public void DrawGrap() {
-
         entries_accX.clear();
         entries_accY.clear();
         entries_accZ.clear();
@@ -294,14 +324,22 @@ public class activity_MPAndroid extends AppCompatActivity  implements
             // DB 삽입 부분
             input_count++; // 데이터 입력받은 순간 count 값 증가
 
-            insert(Ax, Ay, Az); //Database에 추가
-            inputed_count++;
-            textView.setText(inputed_count + " / " + input_count); // 카운트 부분 추가
+            //insert(Ax, Ay, Az); //Database에 추가
+            //inputed_count++;
+            if(!checkDB)
+                textView.setText(inputed_count + " / " + input_count); // 카운트 부분 추가
             // DB 삽입 부분 끝
 
             number_accX = (float) Ax;
             number_accY = (float) Ay;
             number_accZ = (float) Az;
+
+            // ArrayList에 삽입 부분
+            mAccX.add(number_accX);
+            mAccY.add(number_accY);
+            mAccZ.add(number_accZ);
+            // ArrayList에 삽입 부분 끝
+
             check++;
             if (check >= 19) {
                 for (int i = 0; i < 19; i++) {
@@ -391,7 +429,6 @@ public class activity_MPAndroid extends AppCompatActivity  implements
                 catch(Exception e){
                     return new String("Exception: " + e.getMessage());
                 }
-
             }
         }
         InsertData task = new InsertData();
