@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.vip.hammer.MainActivity"
+    tools:context="com.example.vip.hammer.Main2Activity"
     tools:deviceIds="wear_square">
 
     <TextView

@@ -30,7 +30,7 @@
             android:name=".GrapActivity"
             android:label="@string/title_activity_grap" />
         <activity android:name=".activity_grap1" />
-        <activity android:name=".activity_MPAndroid"></activity>
+        <activity android:name=".activity_MPAndroid" />
     </application>
 
 </manifest>
