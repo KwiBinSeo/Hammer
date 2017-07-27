@@ -1,5 +1,6 @@
 package com.example.vip.hammer;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -41,6 +42,10 @@ public class Main2Activity extends WearableActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        // work, up, down 상태 데이터 가져오기
+        Intent intent = getIntent();
+        String state = intent.getStringExtra("state"); // 현재 데이터 측정 상태 state에 저장
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Wearable.API)
