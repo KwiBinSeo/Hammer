@@ -7,7 +7,7 @@
     tools:deviceIds="wear_round">
 
     <Button
-        android:id="@+id/workBtn"
+        android:id="@+id/WorkBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="work"
@@ -16,18 +16,18 @@
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/upBtn"
+        android:id="@+id/UpBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/workBtn"
-        android:layout_below="@+id/workBtn"
+        android:layout_alignStart="@+id/WorkBtn"
+        android:layout_below="@+id/WorkBtn"
         android:text="Up" />
 
     <Button
         android:id="@+id/DownBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/upBtn"
+        android:layout_below="@+id/UpBtn"
         android:layout_centerHorizontal="true"
         android:text="Down" />
 
